@@ -1,15 +1,9 @@
-:root,
-html,
-body,
-h1,
-h3,
-p,
-nav {
-  font-family: "Poppins", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji";
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  outline: 1px red solid;
+}
+
+:root {
   --primary-color: rgb(241, 198, 6);
 }
 
@@ -18,15 +12,13 @@ html {
 }
 
 body {
+  font-family: "Poppins", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
   width: 70%;
   max-width: 1200px;
   margin: 0 auto;
   background-color: white;
 }
-
-/* * {
-  outline: 1px red solid;
-} */
 
 img {
   width: 100%;
@@ -50,13 +42,13 @@ a {
   font-weight: 700;
   background-color: var(--primary-color);
   border: 2px solid white;
-  display: flex;
-  align-items: center;
 }
+
 @media (min-width: 50rem) {
   .nav__burger {
     display: none;
   }
+
   .nav__links {
     display: flex;
     flex-direction: row;
@@ -65,16 +57,12 @@ a {
 
   a {
     flex: 1;
+    align-content: center;
   }
 
   a:hover {
     background-color: rgba(241, 198, 6, 0.5);
   }
-}
-
-ul {
-  padding: 0 2rem;
-  margin: 0;
 }
 
 li {
@@ -100,36 +88,11 @@ textarea {
   padding: 0.5rem 0.5rem;
 }
 
-form,
 form div {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-}
-
-@media (min-width: 50rem) {
-  form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-  }
-
-  .form__message {
-    grid-area: 3 / 1 / 4 / 3;
-  }
-
-  .form__submit {
-    grid-area: 4 / 1 / 5 / 3;
-    place-self: center;
-  }
-}
-
-span {
-  color: red;
-}
-
-textarea {
-  height: 15ch;
+  gap: 1rem;
 }
 
 button {
@@ -141,6 +104,48 @@ button {
   margin-top: 1rem;
 }
 
+@media (min-width: 50rem) {
+  form {
+    display: grid;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form div {
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .form__message {
+    grid-area: 3 / 1 / 4 / 3;
+  }
+
+  .form__submit {
+    grid-area: 4 / 1 / 5 / 3;
+    place-self: center;
+    width: 80%;
+    margin: 2rem;
+  }
+
+  button {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+span {
+  color: red;
+}
+
+textarea {
+  height: 15ch;
+}
+
 .facts__article {
   margin: 1.5rem 0;
   display: flex;
@@ -150,8 +155,6 @@ button {
 
 .facts__header {
   display: flex;
-  justify-content: flex-start;
-  align-items: start;
   gap: 1rem;
 }
 
@@ -164,7 +167,6 @@ button {
   .facts {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 
   .facts__container {
@@ -175,18 +177,13 @@ button {
 
   .facts__img {
     height: 100px;
-    width: clamp(100px, 50%, 200px);
+    min-width: 50%;
+    max-width: 200px;
   }
 }
 
 .boxes {
   display: none;
-}
-
-.boxes__div {
-  background-color: var(--primary-color);
-  padding: 2rem 4rem;
-  border-radius: 15rem;
 }
 
 @media (min-width: 50rem) {
@@ -195,7 +192,15 @@ button {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+  }
+
+  .boxes__div {
+    background-color: var(--primary-color);
+    flex: 1;
+    padding: 2rem 0;
+    text-align: center;
+    border-radius: 15rem;
   }
 }
 
@@ -212,14 +217,17 @@ button {
 
 @media (min-width: 50rem) {
   .stories__article {
-    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 5rem;
+    gap: 1.5rem;
   }
 
   .stories__article:nth-child(1) {
     flex-direction: row-reverse;
+  }
+
+  .stories__img {
+    width: 50%;
   }
 }
 
