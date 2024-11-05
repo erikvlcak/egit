@@ -13,6 +13,17 @@ nav {
   --primary-color: rgb(241, 198, 6);
 }
 
+html {
+  background-color: rgba(241, 198, 6, 0.5);
+}
+
+body {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+}
+
 /* * {
   outline: 1px red solid;
 } */
@@ -27,23 +38,9 @@ nav,
 .nav__links {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: stretch;
   text-align: center;
-}
-
-@media (min-width: 50rem) {
-  .nav__burger {
-    display: none;
-  }
-  .nav__links {
-    display: flex;
-    flex-direction: row;
-  }
-
-  a {
-    flex: 1;
-  }
 }
 
 a {
@@ -52,7 +49,27 @@ a {
   color: black;
   font-weight: 700;
   background-color: var(--primary-color);
-  border-bottom: 2px solid black;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 50rem) {
+  .nav__burger {
+    display: none;
+  }
+  .nav__links {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  a {
+    flex: 1;
+  }
+
+  a:hover {
+    background-color: rgba(241, 198, 6, 0.5);
+  }
 }
 
 ul {
