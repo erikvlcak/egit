@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars($_POST['message']);
 
     $to = "erikvlcak1@gmail.com";
-    $subject = "New contact form submission";
+    $subject = "New form submission.";
     $body = "Name: $name\nCompany: $company\nEmail: $email\nPhone: $phone\nMessage: $message";
     $headers = "From: $email";
 
@@ -17,5 +17,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "error";
     }
 } else {
-    echo "invalid";
+    echo "error";
 }

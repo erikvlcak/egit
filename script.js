@@ -1,6 +1,6 @@
 "use strict";
 
-//display result of regex test
+//select corresponding regex code for each specific input
 function testPattern(input, inputClassName) {
   let regex;
   let testedInputMessage = document.querySelector(`.${inputClassName}-verification-status`);
@@ -23,7 +23,7 @@ function testPattern(input, inputClassName) {
     }
   }
   if (inputClassName !== "form__message") {
-    //display appropriate verification result below input field
+    //display result of a regex test below input field
     if (regex.test(input.value)) {
       testedInputMessage.textContent = String.fromCodePoint(0x2705) + "Correct format";
       testedInputMessage.classList.add("form__verification--correct");
@@ -35,13 +35,6 @@ function testPattern(input, inputClassName) {
     }
   }
 }
-
-//test input values agains regex
-document.querySelectorAll("input, textarea").forEach((item) => {
-  item.addEventListener("keyup", (e) => {
-    testPattern(item, e.target.className);
-  });
-});
 
 //create an array of empty required input fields
 function testRequired() {
@@ -65,12 +58,45 @@ function testCorrectFormat() {
   return wrongFormatArray;
 }
 
+//make list of field with empty required inputs
+function makeListOfEmptyInputs(emptyRequiredList, emptyRequiredMessage) {
+  let ul = document.createElement("ul");
+  ul.textContent = "Empty field:";
+  ul.classList.add("ul--alert");
+  emptyRequiredList.forEach((item) => {
+    let li = document.createElement("li");
+    li.textContent = item;
+    li.classList.add("li--alert");
+    ul.appendChild(li);
+  });
+  emptyRequiredMessage.appendChild(ul);
+}
+
+//make list of field with data in wrong format
+function makeListOfIncorrectInputs(formatErrorList, formatErrorMessage) {
+  let ul = document.createElement("ul");
+  ul.textContent = "Incorrect input:";
+  ul.classList.add("ul--alert");
+  formatErrorList.forEach((item) => {
+    let li = document.createElement("li");
+    li.textContent = item;
+    li.classList.add("li--alert");
+    ul.appendChild(li);
+  });
+  formatErrorMessage.appendChild(ul);
+}
+
 //toggle nav items visibility on small screen
 document.querySelector(".nav__burger").addEventListener("click", () => {
   document.querySelector(".nav__links").classList.toggle("hidden");
 });
 
-function createListOfReqiredFields() {}
+//test input values agains regex
+document.querySelectorAll("input, textarea").forEach((item) => {
+  item.addEventListener("keyup", (e) => {
+    testPattern(item, e.target.className);
+  });
+});
 
 //display error messages for empty required fields or incorrectly filled fields
 document.querySelector(".form__submit-button").addEventListener("click", (e) => {
@@ -90,30 +116,12 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
   if (emptyRequiredList.length !== 0 || formatErrorList.length !== 0) {
     //show list of required fields that are still empty
     if (emptyRequiredList.length !== 0) {
-      let ul = document.createElement("ul");
-      ul.textContent = "Empty field:";
-      ul.classList.add("ul--alert");
-      emptyRequiredList.forEach((item) => {
-        let li = document.createElement("li");
-        li.textContent = item;
-        li.classList.add("li--alert");
-        ul.appendChild(li);
-      });
-      emptyRequiredMessage.appendChild(ul);
+      makeListOfEmptyInputs(emptyRequiredList, emptyRequiredMessage);
     }
 
     //show list of field with data in wrong format
     if (formatErrorList.length !== 0) {
-      let ul = document.createElement("ul");
-      ul.textContent = "Incorrect input:";
-      ul.classList.add("ul--alert");
-      formatErrorList.forEach((item) => {
-        let li = document.createElement("li");
-        li.textContent = item;
-        li.classList.add("li--alert");
-        ul.appendChild(li);
-      });
-      formatErrorMessage.appendChild(ul);
+      makeListOfIncorrectInputs(formatErrorList, formatErrorMessage);
     }
     //form is filled correctly, trigger submission of data
   } else {

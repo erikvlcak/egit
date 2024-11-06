@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  outline: 1px red solid;
+  /* outline: 1px red solid; */
 }
 
 :root {
@@ -16,7 +16,7 @@ html {
 body {
   font-family: "Poppins", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji";
-  width: 70%;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   background-color: white;
@@ -35,6 +35,7 @@ img {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 h3,
@@ -42,9 +43,13 @@ p {
   margin: 0;
 }
 
-p,
-li {
-  font-size: clamp(0.6rem, 1vw + 0.2rem, 1rem);
+a {
+  text-decoration: none;
+  padding: 1rem;
+  color: black;
+  font-weight: 700;
+  background-color: var(--color-yellow);
+  border: 2px solid white;
 }
 
 li {
@@ -53,7 +58,7 @@ li {
 }
 
 section {
-  padding: 1rem;
+  padding: 2rem 5rem 2rem;
 }
 
 label {
@@ -67,6 +72,27 @@ span {
 
 textarea {
   height: 15ch;
+}
+
+@media (min-width: 50rem) {
+  body {
+    width: 80%;
+  }
+
+  p,
+  li,
+  a {
+    font-size: clamp(0.8rem, 1vw + 0.2rem, 1rem);
+    text-wrap: balance;
+  }
+
+  section {
+    padding: 1.5rem;
+  }
+}
+
+.header__img {
+  border-radius: 0;
 }
 
 input,
@@ -87,13 +113,8 @@ textarea {
   text-align: center;
 }
 
-a {
-  text-decoration: none;
-  padding: 1rem;
-  color: black;
-  font-weight: 700;
-  background-color: var(--color-yellow);
-  border: 2px solid white;
+.nav__burger {
+  background-color: rgb(255, 196, 0);
 }
 
 @media (min-width: 50rem) {
@@ -165,9 +186,10 @@ a {
     justify-content: space-evenly;
     align-items: center;
     gap: 1rem;
+    margin: 1rem 0;
   }
 
-  .boxes__div {
+  .boxes__box {
     background-color: var(--color-yellow);
     flex: 1;
     padding: 2rem 0;
@@ -221,6 +243,7 @@ a {
   gap: 0.5rem;
 }
 
+.form__title,
 .form__submit__alert-submission-status {
   text-align: center;
 }
