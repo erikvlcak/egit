@@ -5,6 +5,7 @@
 
 :root {
   --primary-color: rgb(241, 198, 6);
+  --alert-color: rgb(243, 74, 74);
 }
 
 html {
@@ -44,6 +45,11 @@ a {
   border: 2px solid white;
 }
 
+.form__submit__alert-formatError,
+.form__submit__alert-emptyRequired {
+  margin: 1rem;
+}
+
 @media (min-width: 50rem) {
   .nav__burger {
     display: none;
@@ -70,12 +76,17 @@ li {
   margin: 0.8rem 0;
 }
 
+h3,
+p {
+  margin: 0;
+}
+
 section {
   padding: 1rem;
 }
 
 label {
-  font-weight: bold;
+  font-weight: 700;
   margin-top: 1rem;
 }
 
@@ -91,8 +102,8 @@ textarea {
 form div {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+  padding: 0 1rem;
+  gap: 0.5rem;
 }
 
 button {
@@ -107,29 +118,49 @@ button {
 @media (min-width: 50rem) {
   form {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .form {
+  .form-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  form div {
+  .form-section__alerts {
+    display: flex;
+    justify-content: center;
+    align-items: start;
     gap: 1rem;
-    padding: 0.5rem 1rem;
+  }
+
+  .form-section__alerts div {
+    flex: 1;
   }
 
   .form__message {
     grid-area: 3 / 1 / 4 / 3;
   }
 
+  .form__submit__alert-formatError {
+    grid-area: 4 / 1 / 5 / 2;
+  }
+
+  .form__submit__alert-emptyRequired {
+    grid-area: 4 / 2 / 5 / 3;
+  }
+
   .form__submit {
-    grid-area: 4 / 1 / 5 / 3;
+    grid-area: 5 / 1 / 6 / 3;
     place-self: center;
     width: 80%;
     margin: 2rem;
+  }
+
+  .correct {
+    color: green;
+    font-weight: 700;
   }
 
   button {
@@ -155,6 +186,7 @@ textarea {
 
 .facts__header {
   display: flex;
+  align-items: start;
   gap: 1rem;
 }
 
@@ -233,6 +265,34 @@ textarea {
 
 .hidden {
   display: none;
+}
+
+.ul--alert {
+  margin: 0;
+  padding: 0;
+  color: var(--alert-color);
+}
+
+.li--alert {
+  margin: 0.2rem;
+  font-weight: 700;
+  color: var(--alert-color);
+}
+
+.input__message--wrong {
+  color: var(--alert-color);
+}
+
+.input__message--correct {
+  color: rgb(17, 168, 17);
+}
+
+.input__border--correct {
+  border-color: rgb(17, 168, 17);
+}
+
+.input__border--wrong {
+  border-color: var(--alert-color);
 }
 
 @media (min-width: 50rem) {

@@ -120,33 +120,45 @@
         </div>
       </article>
     </section>
-    <section class="form">
-      <h2>Napište nám</h2>
+    <section class="form-section">
+      <h2>Contact us</h2>
+      
     <form action="" method="post">
       <div class="form__name">
-        <label for="name">Jméno <span>*</span> </label>
-        <input type="text" name="name" id="name" />
+        <label for="name">Full name <span>*</span> </label>
+        <input data-attribute="Name" class="form__name" type="text" name="name" id="name" placeholder="Jane Doe" />
+        <div data-attribute="Name" class="form__name-error input__message"></div>
       </div>
       <div class="form__company">
-        <label for="company">Společnost</label>
-        <input type="text" name="company" id="company" />
+        <label for="company">Company</label>
+        <input data-attribute="Company" class="form__company" type="text" name="company" id="company" placeholder="My Company s.r.o." />
+        <div data-attribute="Company" class="form__company-error input__message"></div>
       </div>
       <div class="form__email">
         <label for="email">E-mail <span>*</span> </label>
-        <input type="email" name="email" id="email" />
+        <input data-attribute="E-mail" class="form__email" type="email" name="email" id="email" placeholder="jane.doe@email.com" />
+        <div data-attribute="E-mail" class="form__email-error input__message"></div>
       </div>
       <div class="form__phone">
-        <label for="phone">Telefon <span>*</span> </label>
-        <input type="email" name="phone" id="phone" />
+        <label for="phone">Phone <span>*</span> </label>
+        <input data-attribute="Phone" class="form__phone" type="email" name="phone" id="phone" placeholder="+420 123 456 789" />
+        <div data-attribute="Phone" class="form__phone-error input__message"></div>
       </div>
       <div class="form__message">
-        <label for="message">Zpráva <span>*</span> </label>
-        <textarea name="message" id="message"></textarea>
+        <label for="message">Message <span>*</span> </label>
+        <textarea data-attribute="Message" class="form__message" name="message" id="message" placeholder="Let us know what is on your mind."></textarea>
+        <div data-attribute="Message" class="form__message-error input__message"></div>
       </div>
+      
+        <div class="form__submit__alert-formatError "> </div>
+        <div class="form__submit__alert-emptyRequired "> </div>
+      
       <div  class="form__submit">
-        <button type="button">Odeslat</button>
+        <button class="form__submit-button" type="submit">Submit</button>
+        
       </div>
     </form>
+   
     </section>
   </body>
 </html>
