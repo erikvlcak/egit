@@ -1,5 +1,3 @@
-//TODO: fix border color change - testedInputField classlist
-
 "use strict";
 
 //display result of regex test
@@ -25,6 +23,7 @@ function testPattern(input, inputClassName) {
     }
   }
   if (inputClassName !== "form__message") {
+    //display appropriate verification result below input field
     if (regex.test(input.value)) {
       testedInputMessage.textContent = String.fromCodePoint(0x2705) + "Correct format";
       testedInputMessage.classList.add("form__verification--correct");
@@ -82,11 +81,14 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
   let formatErrorMessage = document.querySelector(".form__submit__alert-formatError");
   let submissionStatus = document.querySelector(".form__submit__alert-submission-status");
 
+  //reset messages triggered by submit
   emptyRequiredMessage.innerHTML = "";
   formatErrorMessage.innerHTML = "";
   submissionStatus.innerHTML = "";
 
+  //check if required fields are filled and all data are in correct format
   if (emptyRequiredList.length !== 0 || formatErrorList.length !== 0) {
+    //show list of required fields that are still empty
     if (emptyRequiredList.length !== 0) {
       let ul = document.createElement("ul");
       ul.textContent = "Empty field:";
@@ -100,6 +102,7 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
       emptyRequiredMessage.appendChild(ul);
     }
 
+    //show list of field with data in wrong format
     if (formatErrorList.length !== 0) {
       let ul = document.createElement("ul");
       ul.textContent = "Incorrect input:";
@@ -112,20 +115,22 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
       });
       formatErrorMessage.appendChild(ul);
     }
+    //form is filled correctly, trigger submission of data
   } else {
     let formData = new FormData(document.querySelector(".form__container"));
     fetch("submitForm.php", {
-      method: "POST",
+      method: "post",
       body: formData,
     })
       .then((response) => response.text())
       .then((text) => {
+        //display appropriate message after submitting
         if (text === "success") {
-          submissionStatus.textContent = "Form submitted successfully!";
+          submissionStatus.textContent = "Message submitted successfully! Thank You!";
           submissionStatus.classList.add("form__verification--correct");
           submissionStatus.classList.remove("form__verification--wrong");
         } else {
-          submissionStatus.textContent = "There was an error submitting the form.";
+          submissionStatus.textContent = "Message submission failed. Contact our support.";
           submissionStatus.classList.add("form__verification--wrong");
           submissionStatus.classList.remove("form__verification--correct");
         }
