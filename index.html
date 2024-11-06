@@ -21,23 +21,23 @@
     <nav>
       <a class="nav__burger" href="#">&#9776</a>
       <div class="nav__links">
-        <a class="nav__link" href="#">Bees are the beest</a>
-        <a class="nav__link" href="#">To bee or not to bee</a>
-        <a class="nav__link" href="#">Sting Sting Sting!</a>
-        <a class="nav__link" href="#">Make honey not war</a>
-        <a class="nav__link" href="#">Buy me a bee(r)</a>
-        <a class="nav__link" href="#">Contact our bees</a>
+        <a href="#">Bees are the beest</a>
+        <a href="#">To bee or not to bee</a>
+        <a href="#">Sting Sting Sting!</a>
+        <a href="#">Make honey not war</a>
+        <a href="#">Buy me a bee(r)</a>
+        <a href="#">Contact our bees</a>
       </div>
     </nav>
     <section class="facts">
-      <h1 class="facts__title">Bees go BZZZ</h1>
+      <h1>Bees go BZZZ</h1>
       <div class="facts__container">
       <article class="facts__article">
         <div class="facts__header">
           <img class="facts__img" src="./images/img-block.jpg" alt="Bees in a hive" />
-          <h3 class="facts__subtitle">Fact #1</h3>
+          <h3>Fact #1</h3>
         </div>
-        <p class="facts__text">
+        <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sint accusamus corrupti dignissimos obcaecati
           quaerat debitis nemo, cum, excepturi non earum voluptas vel laboriosam.
         </p>
@@ -45,9 +45,9 @@
       <article class="facts__article">
         <div class="facts__header">
           <img class="facts__img" src="./images/img-block.jpg" alt="Bees in a hive" />
-          <h3 class="facts__subtitle">Fact #2</h3>
+          <h3>Fact #2</h3>
         </div>
-        <p class="facts__text">
+        <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sint accusamus corrupti dignissimos obcaecati
           quaerat debitis nemo, cum, excepturi non earum voluptas vel laboriosam.
         </p>
@@ -55,9 +55,9 @@
       <article class="facts__article">
         <div class="facts__header">
           <img class="facts__img" src="./images/img-block.jpg" alt="Bees in a hive" />
-          <h3 class="facts__subtitle">Fact #3</h3>
+          <h3>Fact #3</h3>
         </div>
-        <p class="facts__text">
+        <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sint accusamus corrupti dignissimos obcaecati
           quaerat debitis nemo, cum, excepturi non earum voluptas vel laboriosam.
         </p>
@@ -65,9 +65,9 @@
       <article class="facts__article">
         <div class="facts__header">
           <img class="facts__img" src="./images/img-block.jpg" alt="Bees in a hive" />
-          <h3 class="facts__subtitle">Fact #4</h3>
+          <h3>Fact #4</h3>
         </div>
-        <p class="facts__text">
+        <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sint accusamus corrupti dignissimos obcaecati
           quaerat debitis nemo, cum, excepturi non earum voluptas vel laboriosam.
         </p>
@@ -89,8 +89,7 @@
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis fugit magnam sapiente eaque aliquam! Fugiat
           quia atque earum commodi iure dolor, voluptas accusamus architecto! Sit praesentium et explicabo molestiae
           dolorem? Obcaecati eos, reprehenderit sed vero nisi odio vel doloremque esse ipsam inventore, non fugiat
-          eveniet. Ratione, optio nisi. Totam iste fuga temporibus modi quaerat consequatur minima hic explicabo
-          provident asperiores.
+          eveniet. Ratione, optio nisi. 
         </p>
         <ul>
           <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
@@ -108,8 +107,7 @@
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis fugit magnam sapiente eaque aliquam! Fugiat
           quia atque earum commodi iure dolor, voluptas accusamus architecto! Sit praesentium et explicabo molestiae
           dolorem? Obcaecati eos, reprehenderit sed vero nisi odio vel doloremque esse ipsam inventore, non fugiat
-          eveniet. Ratione, optio nisi. Totam iste fuga temporibus modi quaerat consequatur minima hic explicabo
-          provident asperiores.
+          eveniet. Ratione, optio nisi. 
         </p>
         <ul>
           <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
@@ -122,43 +120,40 @@
     </section>
     <section class="form-section">
       <h2>Contact us</h2>
-      
-    <form action="" method="post">
-      <div class="form__name">
+      <p class="form__instruction"><i>Fields marked by <span>*</span> are required.</i></p>
+    <form class="form__container" action="./submitForm.php" method="post">
+      <div class="form__input-container">
         <label for="name">Full name <span>*</span> </label>
-        <input data-attribute="Name" class="form__name" type="text" name="name" id="name" placeholder="Jane Doe" />
-        <div data-attribute="Name" class="form__name-error input__message"></div>
+        <input required data-attribute="Name" class="form__name" type="text" name="name" id="name" placeholder="Jane Doe" />
+        <div data-attribute="Name" class="form__name-verification-status form__verification"></div>
       </div>
-      <div class="form__company">
+      <div class="form__input-container">
         <label for="company">Company</label>
         <input data-attribute="Company" class="form__company" type="text" name="company" id="company" placeholder="My Company s.r.o." />
-        <div data-attribute="Company" class="form__company-error input__message"></div>
+        <div data-attribute="Company" class="form__company-verification-status form__verification"></div>
       </div>
-      <div class="form__email">
+      <div class="form__input-container">
         <label for="email">E-mail <span>*</span> </label>
-        <input data-attribute="E-mail" class="form__email" type="email" name="email" id="email" placeholder="jane.doe@email.com" />
-        <div data-attribute="E-mail" class="form__email-error input__message"></div>
+        <input required data-attribute="E-mail" class="form__email" type="email" name="email" id="email" placeholder="jane.doe@email.com" />
+        <div data-attribute="E-mail" class="form__email-verification-status form__verification"></div>
       </div>
-      <div class="form__phone">
+      <div class="form__input-container">
         <label for="phone">Phone <span>*</span> </label>
-        <input data-attribute="Phone" class="form__phone" type="email" name="phone" id="phone" placeholder="+420 123 456 789" />
-        <div data-attribute="Phone" class="form__phone-error input__message"></div>
+        <input required data-attribute="Phone" class="form__phone" type="text" name="phone" id="phone" placeholder="+420 123 456 789" />
+        <div data-attribute="Phone" class="form__phone-verification-status form__verification"></div>
       </div>
-      <div class="form__message">
+      <div class="form__input-container form__textarea">
         <label for="message">Message <span>*</span> </label>
-        <textarea data-attribute="Message" class="form__message" name="message" id="message" placeholder="Let us know what is on your mind."></textarea>
-        <div data-attribute="Message" class="form__message-error input__message"></div>
+        <textarea required data-attribute="Message" class="form__message" name="message" id="message" placeholder="Let us know what is on your mind."></textarea>
+        <div data-attribute="Message" class="form__message-verification-status form__verification"></div>
       </div>
-      
-        <div class="form__submit__alert-formatError "> </div>
-        <div class="form__submit__alert-emptyRequired "> </div>
-      
+      <div class="form__submit__alert-submission-status"></div>
+      <div class="form__submit__alert-emptyRequired"></div>
+      <div class="form__submit__alert-formatError"></div>
       <div  class="form__submit">
         <button class="form__submit-button" type="submit">Submit</button>
-        
       </div>
     </form>
-   
     </section>
   </body>
 </html>

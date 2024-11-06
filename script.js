@@ -5,8 +5,7 @@
 //display result of regex test
 function testPattern(input, inputClassName) {
   let regex;
-  let testedInputMessage = document.querySelector(`.${inputClassName}-error`);
-  let testedInputField = document.querySelector(`#${inputClassName}`);
+  let testedInputMessage = document.querySelector(`.${inputClassName}-verification-status`);
   switch (inputClassName) {
     case "form__name": {
       regex = /^[a-z ,.'-]+$/i;
@@ -25,19 +24,16 @@ function testPattern(input, inputClassName) {
       break;
     }
   }
-
-  if (regex.test(input.value)) {
-    testedInputMessage.textContent = String.fromCodePoint(0x2705) + "Correct format";
-    testedInputMessage.classList.add("input__message--correct");
-    testedInputMessage.classList.remove("input__message--wrong");
-    testedInputField.classList.add("input__border--correct");
-    testedInputField.classList.remove("input__border--wrong");
-  } else {
-    testedInputMessage.textContent = String.fromCodePoint(0x274c) + "Wrong format";
-    testedInputMessage.classList.add("input__message--wrong");
-    testedInputMessage.classList.remove("input__message--correct");
-    testedInputField.classList.add("input__border--wrong");
-    testedInputField.classList.remove("input__border--correct");
+  if (inputClassName !== "form__message") {
+    if (regex.test(input.value)) {
+      testedInputMessage.textContent = String.fromCodePoint(0x2705) + "Correct format";
+      testedInputMessage.classList.add("form__verification--correct");
+      testedInputMessage.classList.remove("form__verification--wrong");
+    } else {
+      testedInputMessage.textContent = String.fromCodePoint(0x274c) + "Wrong format";
+      testedInputMessage.classList.add("form__verification--wrong");
+      testedInputMessage.classList.remove("form__verification--correct");
+    }
   }
 }
 
@@ -51,7 +47,7 @@ document.querySelectorAll("input, textarea").forEach((item) => {
 //create an array of empty required input fields
 function testRequired() {
   let emptyFieldsArray = [];
-  document.querySelectorAll("input, textarea").forEach((item) => {
+  document.querySelectorAll("input[required], textarea[required]").forEach((item) => {
     if (!item.value) {
       emptyFieldsArray.push(item.dataset.attribute);
     }
@@ -62,7 +58,7 @@ function testRequired() {
 //create an array of input fields not passing regex text
 function testCorrectFormat() {
   let wrongFormatArray = [];
-  document.querySelectorAll(".input__message").forEach((item) => {
+  document.querySelectorAll(".form__verification").forEach((item) => {
     if (item.textContent.includes("Wrong")) {
       wrongFormatArray.push(item.dataset.attribute);
     }
@@ -72,24 +68,28 @@ function testCorrectFormat() {
 
 //toggle nav items visibility on small screen
 document.querySelector(".nav__burger").addEventListener("click", () => {
-  document.querySelector(".nav__div").classList.toggle("hidden");
+  document.querySelector(".nav__links").classList.toggle("hidden");
 });
+
+function createListOfReqiredFields() {}
 
 //display error messages for empty required fields or incorrectly filled fields
 document.querySelector(".form__submit-button").addEventListener("click", (e) => {
+  e.preventDefault();
   let emptyRequiredList = testRequired();
   let emptyRequiredMessage = document.querySelector(".form__submit__alert-emptyRequired");
   let formatErrorList = testCorrectFormat();
   let formatErrorMessage = document.querySelector(".form__submit__alert-formatError");
+  let submissionStatus = document.querySelector(".form__submit__alert-submission-status");
 
-  if (emptyRequiredList.length !== 0 || formatErrorList !== 0) {
-    e.preventDefault();
-    emptyRequiredMessage.innerHTML = "";
-    formatErrorMessage.innerHTML = "";
+  emptyRequiredMessage.innerHTML = "";
+  formatErrorMessage.innerHTML = "";
+  submissionStatus.innerHTML = "";
 
+  if (emptyRequiredList.length !== 0 || formatErrorList.length !== 0) {
     if (emptyRequiredList.length !== 0) {
       let ul = document.createElement("ul");
-      ul.textContent = "These fields are required:";
+      ul.textContent = "Empty field:";
       ul.classList.add("ul--alert");
       emptyRequiredList.forEach((item) => {
         let li = document.createElement("li");
@@ -102,7 +102,7 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
 
     if (formatErrorList.length !== 0) {
       let ul = document.createElement("ul");
-      ul.textContent = "These fields are filled incorrectly:";
+      ul.textContent = "Incorrect input:";
       ul.classList.add("ul--alert");
       formatErrorList.forEach((item) => {
         let li = document.createElement("li");
@@ -113,8 +113,22 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
       formatErrorMessage.appendChild(ul);
     }
   } else {
-    e.preventDefault(); //remove this line to submit form
-    console.log("submitting");
-    //submit
+    let formData = new FormData(document.querySelector(".form__container"));
+    fetch("submitForm.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((text) => {
+        if (text === "success") {
+          submissionStatus.textContent = "Form submitted successfully!";
+          submissionStatus.classList.add("form__verification--correct");
+          submissionStatus.classList.remove("form__verification--wrong");
+        } else {
+          submissionStatus.textContent = "There was an error submitting the form.";
+          submissionStatus.classList.add("form__verification--wrong");
+          submissionStatus.classList.remove("form__verification--correct");
+        }
+      });
   }
 });
