@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  /* outline: 1px red solid; */
 }
 
 :root {
@@ -114,7 +113,7 @@ textarea {
 }
 
 .nav__burger {
-  background-color: rgb(255, 196, 0);
+  background-color: gold;
 }
 
 @media (min-width: 50rem) {
@@ -134,7 +133,7 @@ textarea {
   }
 
   a:hover {
-    background-color: rgba(241, 198, 6, 0.5);
+    background-color: gold;
   }
 }
 
@@ -207,6 +206,7 @@ textarea {
 .stories__article {
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
 }
 
 .stories__img {
@@ -220,6 +220,7 @@ textarea {
     flex-direction: row;
     align-items: center;
     gap: 1.5rem;
+    margin: 2rem 0;
   }
 
   .stories__article:nth-child(1) {
@@ -331,6 +332,11 @@ textarea {
   .form__submit-button {
     margin: 0;
     width: 80%;
+    cursor: pointer;
+  }
+
+  .form__submit-button:hover {
+    background-color: gold;
   }
 }
 

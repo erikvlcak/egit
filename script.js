@@ -143,7 +143,7 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
         //display message according to response status from submitForm.php
         if (data.status === "success") {
           console.log("I run");
-          submissionStatus.textContent = "Message submitted successfully! Thank You!";
+          submissionStatus.textContent = "Your message has been submitted! Thank You!";
           submissionStatus.classList.add("form__verification--correct");
           submissionStatus.classList.remove("form__verification--wrong");
           //reset input fields and clear verification messages
