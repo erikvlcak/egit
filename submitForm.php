@@ -1,4 +1,6 @@
 <?php
+
+//extract submitted values from POST superglobal
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST['name']);
     $company = htmlspecialchars($_POST['company']);
@@ -6,16 +8,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = htmlspecialchars($_POST['phone']);
     $message = htmlspecialchars($_POST['message']);
 
+    //compose email
     $to = "erikvlcak1@gmail.com";
     $subject = "New form submission.";
     $body = "Name: $name\nCompany: $company\nEmail: $email\nPhone: $phone\nMessage: $message";
     $headers = "From: $email";
 
-    if (mail($to, $subject, $body, $headers)) {
-        echo "success";
+    // Here I would use -
+    //mail($to, $subject, $body, $headers);
+    // - but since mailserver is not configured, it will generate an error.
+
+    //To skip it and simulate successful/unsuccessful submission of email, alter $mailSent value
+    $mailSent = true;
+
+    if ($mailSent) {
+        $response = ['status' => 'success'];
     } else {
-        echo "error";
+        $response = ['status' => 'fail'];
     }
 } else {
-    echo "error";
+    $response = ['status' => 'invalid'];
 }
+
+//send response as json back to script.js
+header('Content-type: application/json');
+echo json_encode($response);

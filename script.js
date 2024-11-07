@@ -40,10 +40,11 @@ function testPattern(input, inputClassName) {
 function testRequired() {
   let emptyFieldsArray = [];
   document.querySelectorAll("input[required], textarea[required]").forEach((item) => {
-    if (!item.value) {
+    if (item.value === "@" || item.value === "") {
       emptyFieldsArray.push(item.dataset.attribute);
     }
   });
+  console.log("empty reqired fields:", emptyFieldsArray);
   return emptyFieldsArray;
 }
 
@@ -55,13 +56,14 @@ function testCorrectFormat() {
       wrongFormatArray.push(item.dataset.attribute);
     }
   });
+  console.log("incorrect format fields", wrongFormatArray);
   return wrongFormatArray;
 }
 
 //make list of field with empty required inputs
 function makeListOfEmptyInputs(emptyRequiredList, emptyRequiredMessage) {
   let ul = document.createElement("ul");
-  ul.textContent = "Empty field:";
+  ul.textContent = "Required fields:";
   ul.classList.add("ul--alert");
   emptyRequiredList.forEach((item) => {
     let li = document.createElement("li");
@@ -75,7 +77,7 @@ function makeListOfEmptyInputs(emptyRequiredList, emptyRequiredMessage) {
 //make list of field with data in wrong format
 function makeListOfIncorrectInputs(formatErrorList, formatErrorMessage) {
   let ul = document.createElement("ul");
-  ul.textContent = "Incorrect input:";
+  ul.textContent = "Incorrect inputs:";
   ul.classList.add("ul--alert");
   formatErrorList.forEach((item) => {
     let li = document.createElement("li");
@@ -102,10 +104,10 @@ document.querySelectorAll("input, textarea").forEach((item) => {
 document.querySelector(".form__submit-button").addEventListener("click", (e) => {
   e.preventDefault();
   let emptyRequiredList = testRequired();
-  let emptyRequiredMessage = document.querySelector(".form__submit__alert-emptyRequired");
+  let emptyRequiredMessage = document.querySelector(".form__alert-emptyRequired");
   let formatErrorList = testCorrectFormat();
-  let formatErrorMessage = document.querySelector(".form__submit__alert-formatError");
-  let submissionStatus = document.querySelector(".form__submit__alert-submission-status");
+  let formatErrorMessage = document.querySelector(".form__alert-formatError");
+  let submissionStatus = document.querySelector(".form__submission-status");
 
   //reset messages triggered by submit
   emptyRequiredMessage.innerHTML = "";
@@ -125,20 +127,43 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
     }
     //form is filled correctly, trigger submission of data
   } else {
-    let formData = new FormData(document.querySelector(".form__container"));
+    let text;
+    let formData = new FormData(document.querySelector(".form__body"));
     fetch("submitForm.php", {
-      method: "post",
+      method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
-      .then((text) => {
-        //display appropriate message after submitting
-        if (text === "success") {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network error: ", response.status, response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        //display message according to response status from submitForm.php
+        if (data.status === "success") {
+          console.log("I run");
           submissionStatus.textContent = "Message submitted successfully! Thank You!";
           submissionStatus.classList.add("form__verification--correct");
           submissionStatus.classList.remove("form__verification--wrong");
-        } else {
+          //reset input fields and clear verification messages
+          document.querySelectorAll("input, textarea").forEach((item) => {
+            console.log("I clean", item);
+            if (item.className === "form__email") {
+              item.value = "@";
+            } else {
+              item.value = "";
+            }
+          });
+          document.querySelectorAll(".form__verification").forEach((item) => {
+            item.textContent = "";
+          });
+        } else if (data.status === "failed") {
           submissionStatus.textContent = "Message submission failed. Contact our support.";
+          submissionStatus.classList.add("form__verification--wrong");
+          submissionStatus.classList.remove("form__verification--correct");
+        } else {
+          submissionStatus.textContent = "There was an error submitting the form.";
           submissionStatus.classList.add("form__verification--wrong");
           submissionStatus.classList.remove("form__verification--correct");
         }
