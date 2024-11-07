@@ -44,7 +44,6 @@ function testRequired() {
       emptyFieldsArray.push(item.dataset.attribute);
     }
   });
-  console.log("empty reqired fields:", emptyFieldsArray);
   return emptyFieldsArray;
 }
 
@@ -56,7 +55,6 @@ function testCorrectFormat() {
       wrongFormatArray.push(item.dataset.attribute);
     }
   });
-  console.log("incorrect format fields", wrongFormatArray);
   return wrongFormatArray;
 }
 
@@ -127,7 +125,6 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
     }
     //form is filled correctly, trigger submission of data
   } else {
-    let text;
     let formData = new FormData(document.querySelector(".form__body"));
     fetch("submitForm.php", {
       method: "POST",
@@ -163,7 +160,7 @@ document.querySelector(".form__submit-button").addEventListener("click", (e) => 
           submissionStatus.classList.add("form__verification--wrong");
           submissionStatus.classList.remove("form__verification--correct");
         } else {
-          submissionStatus.textContent = "There was an error submitting the form.";
+          submissionStatus.textContent = "Server is not responding. Try again later.";
           submissionStatus.classList.add("form__verification--wrong");
           submissionStatus.classList.remove("form__verification--correct");
         }

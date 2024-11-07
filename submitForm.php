@@ -30,6 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = ['status' => 'invalid'];
 }
 
-//send response as json back to script.js
+//send json response
 header('Content-type: application/json');
 echo json_encode($response);

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /* outline: 1px solid red; */
 }
 
 :root {
@@ -35,6 +36,7 @@ img {
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
+  box-shadow: 1px 1px 10px;
 }
 
 h3,
@@ -92,6 +94,7 @@ textarea {
 
 .header__img {
   border-radius: 0;
+  box-shadow: none;
 }
 
 input,
@@ -264,9 +267,9 @@ textarea {
 
 .form__alerts {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: start;
-  justify-content: space-between;
+  justify-content: start;
   gap: 2rem;
   padding: 0 2rem;
 }
@@ -278,8 +281,7 @@ textarea {
 
 @media (min-width: 25rem) {
   .form__alerts {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
   }
 }
 
@@ -321,6 +323,7 @@ textarea {
 
   .form__alerts {
     grid-area: 4 / 1 / 5 / 3;
+    flex-direction: row;
   }
 
   .form__submit {
